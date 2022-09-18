@@ -26,7 +26,7 @@ GOTCHA - The SSH-TTY control Interface
 Installation
 ------------
    
-   root privileges required!
+   Linux syscall tracer `(strace) <https://strace.io/>`_ and root privileges required!
 
 From pypi::
 
@@ -43,4 +43,3 @@ Community Distributions
 -----------------------
 
 Feel free! All contributions are welcome.
-
