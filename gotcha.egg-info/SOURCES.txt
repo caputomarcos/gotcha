@@ -1,0 +1,11 @@
+MANIFEST.in
+README.rst
+setup.py
+gotcha/__init__.py
+gotcha/__main__.py
+gotcha.egg-info/PKG-INFO
+gotcha.egg-info/SOURCES.txt
+gotcha.egg-info/dependency_links.txt
+gotcha.egg-info/entry_points.txt
+gotcha.egg-info/requires.txt
+gotcha.egg-info/top_level.txt
