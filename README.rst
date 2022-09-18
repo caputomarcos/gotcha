@@ -30,7 +30,7 @@ Installation
 
 From pypi::
 
-   pip3 install gotcha
+   pip3 install ttyGotcha
 
 From source::
 
