@@ -1,0 +1,55 @@
+Metadata-Version: 2.1
+Name: ttyGotcha
+Version: 0.0.3
+Summary: SSH-TTY control Interface
+Home-page: https://www.linode.com/docs/api/
+Author: Marcos Caputo
+Author-email: caputo.marcos@gmail.com
+License: MIT
+Requires-Python: >=3.10
+
+GOTCHA - The SSH-TTY control Interface
+======================================
+::
+
+         ██████╗  ██████╗ ████████╗ ██████╗██╗  ██╗ █████╗ ██╗██╗██╗
+        ██╔════╝ ██╔═══██╗╚══██╔══╝██╔════╝██║  ██║██╔══██╗██║██║██║
+        ██║  ███╗██║   ██║   ██║   ██║     ███████║███████║██║██║██║
+        ██║   ██║██║   ██║   ██║   ██║     ██╔══██║██╔══██║╚═╝╚═╝╚═╝
+        ╚██████╔╝╚██████╔╝   ██║   ╚██████╗██║  ██║██║  ██║██╗██╗██╗
+        ╚═════╝  ╚═════╝    ╚═╝    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝╚═╝
+
+        SSH-TTY control
+        
+
+
+        Usage: GOTCHA [OPTIONS]
+
+        Args: --auto                # Lazy mode, auto-attach to first found session.
+              --list                # List available SSH Sessions.
+              --tty /dev/pts/XX     # Point GOTCHA to specific TTY.
+              --replay <file>       # Play previously recorded session.
+              --speed 4             # Replay speed multiplier (Default: 4).
+
+                     ----- root privileges required! -----
+
+Installation
+------------
+   
+   Linux syscall tracer `(strace) <https://strace.io/>`_ and root privileges required!
+
+From pypi::
+
+   pip3 install ttyGotcha
+
+From source::
+
+   git clone https://github.com/caputomarcos/gotcha.git
+   cd gotcha
+   python setup.py install
+
+
+Community Distributions
+-----------------------
+
+Feel free! All contributions are welcome.

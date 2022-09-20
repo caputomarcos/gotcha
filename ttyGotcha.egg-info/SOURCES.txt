@@ -1,0 +1,10 @@
+README.rst
+setup.py
+gotcha/__init__.py
+gotcha/__main__.py
+ttyGotcha.egg-info/PKG-INFO
+ttyGotcha.egg-info/SOURCES.txt
+ttyGotcha.egg-info/dependency_links.txt
+ttyGotcha.egg-info/entry_points.txt
+ttyGotcha.egg-info/requires.txt
+ttyGotcha.egg-info/top_level.txt

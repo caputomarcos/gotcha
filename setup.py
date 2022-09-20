@@ -15,12 +15,12 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
 
 setup(
     name="ttyGotcha",
-    version="0.0.3",
+    version="0.0.4",
     description="SSH-TTY control Interface",
     long_description=long_description,
     author="Marcos Caputo",
     author_email="caputo.marcos@gmail.com",
-    url="https://www.linode.com/docs/api/",
+    url="https://github.com/caputomarcos/gotcha",
     packages=[
         "gotcha",
     ],
