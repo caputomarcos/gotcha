@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
 Name: ttyGotcha
-Version: 0.0.3
+Version: 0.0.4
 Summary: SSH-TTY control Interface
-Home-page: https://www.linode.com/docs/api/
+Home-page: https://github.com/caputomarcos/gotcha
 Author: Marcos Caputo
 Author-email: caputo.marcos@gmail.com
 License: MIT
