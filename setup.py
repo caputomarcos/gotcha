@@ -15,7 +15,7 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
 
 setup(
     name="ttyGotcha",
-    version="0.0.5",
+    version="0.0.6",
     description="SSH-TTY control Interface",
     long_description=long_description,
     author="Marcos Caputo",
