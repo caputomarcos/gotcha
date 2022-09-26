@@ -9,8 +9,8 @@
 #
 #        SSH-TTY control
 """
-VERSION = (0, 1, 0)
+VERSION = (0, 1, 1)
 
-__updated__ = "2022-09-25 22:29:27"
+__updated__ = "2022-09-26 10:32:59"
 
 __version__ = ".".join(map(str, VERSION))

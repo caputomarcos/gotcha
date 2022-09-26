@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """gotcha.py
 """
-__updated__ = "2022-09-25 22:14:47"
+__updated__ = "2022-09-26 10:28:54"
 
 from subprocess import Popen, PIPE
 from threading import Thread
@@ -155,11 +155,11 @@ class Gotcha:
     def usage(self, err=None):
         """
         Usage: GOTCHA [OPTIONS]\n
-        Args: --auto                # Lazy mode, auto-attach to first found session.
-              --list                # List available SSH Sessions.
+        Args: --list                # List available SSH Sessions.
+              --auto                # Lazy mode, auto-attach to first found session.
               --tty /dev/pts/XX     # Point GOTCHA to specific TTY.
-              --replay <file>       # Play previously recorded session.
-              --speed 4             # Replay speed multiplier (Default: 4).\n
+              --speed 4             # Replay speed multiplier (Default: 4).
+              --replay <file>       # Play previously recorded session (Default: Latest).\n
                      ----- root privileges required! -----\r\n
         """
         self.eprint(self.usage.__doc__)
@@ -501,8 +501,8 @@ class Gotcha:
         self.session_file = f"sess-{exec_timestamp}.gotcha.log"
 
         # speed
-        if "--speed" in sys.argv:
-            self.speed = float(sys.argv[sys.argv.index("--speed") + 1])
+        # if "--speed" in sys.argv:
+        #     self.speed = float(sys.argv[sys.argv.index("--speed") + 1])
 
         # replay
         if "--replay" in sys.argv:
@@ -517,6 +517,9 @@ class Gotcha:
             if not os.path.isfile(self.session_file):
                 self.usage(err=f"Cannot open {self.session_file}")
             self.play = True
+
+        if "--replay" in sys.argv and "--speed" in sys.argv:
+            self.speed = float(sys.argv[sys.argv.index("--speed") + 1])
 
         # play
         if not self.play:
