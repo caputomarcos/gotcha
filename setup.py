@@ -9,7 +9,7 @@ from subprocess import check_call
 from pkg_resources import parse_requirements
 from setuptools import setup, Command
 
-NAME = 'gotcha'
+NAME = "gotcha"
 VERSION = None
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -18,10 +18,10 @@ here = os.path.abspath(os.path.dirname(__file__))
 about = {}
 if not VERSION:
     SLUG = NAME.lower().replace("-", "_").replace(" ", "_")
-    with open(os.path.join(here, SLUG, '__version__.py'), encoding='utf-8') as f:
+    with open(os.path.join(here, SLUG, "__version__.py"), encoding="utf-8") as f:
         exec(f.read(), about)
 else:
-    about['__version__'] = VERSION
+    about["__version__"] = VERSION
 
 
 class ListDependenciesCommand(Command):
@@ -31,16 +31,13 @@ class ListDependenciesCommand(Command):
     user_options: List[Any] = []
 
     def initialize_options(self):
-        """initialize_options
-        """
+        """initialize_options"""
 
     def finalize_options(self):
-        """finalize_options
-        """
+        """finalize_options"""
 
     def run(self):
-        """run
-        """
+        """run"""
         cfg = ConfigParser()
         cfg.read("setup.cfg")
         requirements = cfg["options"]["install_requires"]
@@ -54,16 +51,13 @@ class PyInstallerCommand(Command):
     user_options: List[Any] = []
 
     def initialize_options(self):
-        """initialize_options
-        """
+        """initialize_options"""
 
     def finalize_options(self):
-        """finalize_options
-        """
+        """finalize_options"""
 
     def run(self):
-        """run
-        """
+        """run"""
         cfg = ConfigParser()
         cfg.read("setup.cfg")
         command = [

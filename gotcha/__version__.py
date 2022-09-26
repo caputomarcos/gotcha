@@ -13,4 +13,4 @@ VERSION = (0, 1, 0)
 
 __updated__ = "2022-09-25 22:29:27"
 
-__version__ = '.'.join(map(str, VERSION))
+__version__ = ".".join(map(str, VERSION))
