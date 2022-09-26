@@ -1,10 +1,27 @@
 """setup GOTCHA_TTY
 """
+__updated__ = "2022-09-25 22:31:15"
+
+import os
 from configparser import ConfigParser
 from typing import Any, List
 from subprocess import check_call
 from pkg_resources import parse_requirements
 from setuptools import setup, Command
+
+NAME = 'gotcha'
+VERSION = None
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+# Load the package's __version__.py module as a dictionary.
+about = {}
+if not VERSION:
+    SLUG = NAME.lower().replace("-", "_").replace(" ", "_")
+    with open(os.path.join(here, SLUG, '__version__.py'), encoding='utf-8') as f:
+        exec(f.read(), about)
+else:
+    about['__version__'] = VERSION
 
 
 class ListDependenciesCommand(Command):
@@ -68,7 +85,8 @@ class PyInstallerCommand(Command):
 
 
 setup(
-    use_scm_version={"fallback_version": "noversion"},
+    # use_scm_version={"fallback_version": "noversion"},
+    version=about["__version__"],
     cmdclass={
         "dependencies": ListDependenciesCommand,
         "pyinstaller": PyInstallerCommand,

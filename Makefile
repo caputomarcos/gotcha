@@ -39,7 +39,7 @@ build:
 
 .PHONY: pyinstaller
 pyinstaller: deps
-	python setup.py pyinstaller --add-binary "libcrypt.so.2:lib"
+	python setup.py pyinstaller
 
 .PHONY: staticx_deps
 staticx_deps:
