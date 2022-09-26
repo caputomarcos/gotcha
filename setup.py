@@ -1,38 +1,76 @@
-#!/usr/bin/env python3
-"""_summary_
-    """
-from io import open
-from os import path
-
-from setuptools import setup
-
-here = path.abspath(path.dirname(__file__))
+"""setup GOTCHA_TTY
+"""
+from configparser import ConfigParser
+from typing import Any, List
+from subprocess import check_call
+from pkg_resources import parse_requirements
+from setuptools import setup, Command
 
 
-# get the long description from the README.rst
-with open(path.join(here, "README.rst"), encoding="utf-8") as f:
-    long_description = f.read()
+class ListDependenciesCommand(Command):
+    """A custom command to list dependencies"""
+
+    description = "list package dependencies"
+    user_options: List[Any] = []
+
+    def initialize_options(self):
+        """initialize_options
+        """
+
+    def finalize_options(self):
+        """finalize_options
+        """
+
+    def run(self):
+        """run
+        """
+        cfg = ConfigParser()
+        cfg.read("setup.cfg")
+        requirements = cfg["options"]["install_requires"]
+        print(requirements)
+
+
+class PyInstallerCommand(Command):
+    """A custom command to run PyInstaller to build standalone executable."""
+
+    description = "run PyInstaller on gotcha entrypoint"
+    user_options: List[Any] = []
+
+    def initialize_options(self):
+        """initialize_options
+        """
+
+    def finalize_options(self):
+        """finalize_options
+        """
+
+    def run(self):
+        """run
+        """
+        cfg = ConfigParser()
+        cfg.read("setup.cfg")
+        command = [
+            "pyinstaller",
+            "--additional-hooks-dir",
+            "pyinstaller_hooks",
+            "--clean",
+            "--onefile",
+            "--name",
+            "gotcha",
+        ]
+        setup_cfg = cfg["options"]["install_requires"]
+        requirements = parse_requirements(setup_cfg)
+        for _r in requirements:
+            command.extend(["--hidden-import", _r.key])
+        command.append("gotcha/__main__.py")
+        print(" ".join(command))
+        check_call(command)
+
 
 setup(
-    name="ttyGotcha",
-    version="0.0.6",
-    description="SSH-TTY control Interface",
-    long_description=long_description,
-    author="Marcos Caputo",
-    author_email="caputo.marcos@gmail.com",
-    url="https://github.com/caputomarcos/gotcha",
-    packages=[
-        "gotcha",
-    ],
-    license="MIT",
-    install_requires=[
-        "psutil==5.9.2",
-    ],
-    entry_points={
-        "console_scripts": [
-            "gotcha = gotcha:main",
-        ]
+    use_scm_version={"fallback_version": "noversion"},
+    cmdclass={
+        "dependencies": ListDependenciesCommand,
+        "pyinstaller": PyInstallerCommand,
     },
-    python_requires=">=3.10",
-    include_package_data=True,
 )

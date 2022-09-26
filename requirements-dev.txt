@@ -1,0 +1,17 @@
+flake8
+pytest 
+requests-mock 
+coverage 
+pytest-cov
+setuptools
+setuptools_scm
+twine
+pyinstaller
+staticx
+black
+pre-commit
+flake8-bugbear
+flake8-mypy
+pluggy
+patchelf-wrapper
+scons

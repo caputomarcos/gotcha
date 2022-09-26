@@ -1,5 +1,32 @@
-/build/
-/dist/
-/venv/
-/ttyGotcha.egg-info/
-*.log
+*.pyc
+.venv
+venv/
+# .vscode
+.coverage
+.idea
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+*.spec
+.eggs
+pip-wheel-metadata
+
+# Directory Cache Files
+.DS_Store
+thumbs.db
+__pycache__
+.mypy_cache
