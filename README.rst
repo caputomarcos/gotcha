@@ -43,3 +43,9 @@ Community Distributions
 -----------------------
 
 Feel free! All contributions are welcome.
+
+
+TO DO
+-----
+ 
+   Change __main__.main and gotcha.main based on the file => args.py
