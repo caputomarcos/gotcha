@@ -119,8 +119,15 @@ class Gotcha:
         self.pid = None
         self.play = False
 
-        self.keystrokes_file = ""
-        self.session_file = ""
+        # %Y-%m-%d-%H%M e.g. 2022-09-08-1236
+        _exec_timestamp = time.strftime("%Y-%m-%d-%H%M", time.localtime())
+
+        # keys-%Y-%m-%d-%H%M.gotcha.log
+        self.keystrokes_file = f"keys-{_exec_timestamp}.gotcha.log"
+
+        # sess-%Y-%m-%d-%H%M.gotcha.log
+        self.session_file = f"sess-{_exec_timestamp}.gotcha.log"
+
         self.working = True
         self.tty = ""
 
@@ -490,19 +497,6 @@ class Gotcha:
 
         if len(sys.argv[1:]) == 0:
             self.usage()
-
-        # %Y-%m-%d-%H%M e.g. 2022-09-08-1236
-        exec_timestamp = time.strftime("%Y-%m-%d-%H%M", time.localtime())
-
-        # keys-%Y-%m-%d-%H%M.gotcha.log
-        self.keystrokes_file = f"keys-{exec_timestamp}.gotcha.log"
-
-        # sess-%Y-%m-%d-%H%M.gotcha.log
-        self.session_file = f"sess-{exec_timestamp}.gotcha.log"
-
-        # speed
-        # if "--speed" in sys.argv:
-        #     self.speed = float(sys.argv[sys.argv.index("--speed") + 1])
 
         # replay
         if "--replay" in sys.argv:

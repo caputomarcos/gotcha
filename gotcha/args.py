@@ -1,19 +1,40 @@
 """args
 """
+import os
+import sys
 import argparse
 import textwrap
+from dataclasses import dataclass
+from shutil import which
+
+
+@dataclass
+class GotchaArgs:
+    """
+        GotchaArgs
+    """
+    verbose: bool = False
+    quiet: bool = False
+    list: bool = False
+    tty: str = ''
+    auto: bool = False
+    replay: str = ''
+    speed: int = 1
+
 
 parser = argparse.ArgumentParser(
     formatter_class=argparse.RawTextHelpFormatter,
     description=textwrap.dedent('''\
+·:.                                                            .:·
+
     ██████╗  ██████╗ ████████╗ ██████╗██╗  ██╗ █████╗ ██╗██╗██╗
    ██╔════╝ ██╔═══██╗╚══██╔══╝██╔════╝██║  ██║██╔══██╗██║██║██║
    ██║  ███╗██║   ██║   ██║   ██║     ███████║███████║██║██║██║
    ██║   ██║██║   ██║   ██║   ██║     ██╔══██║██╔══██║╚═╝╚═╝╚═╝
    ╚██████╔╝╚██████╔╝   ██║   ╚██████╗██║  ██║██║  ██║██╗██╗██╗
     ╚═════╝  ╚═════╝    ╚═╝    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝╚═╝
-   
-.:·                      SSH-TTY control                       ·:.
+
+.:·                                                             ·:.
 '''))
 
 # Displays group options
@@ -53,11 +74,26 @@ command_group.add_argument(
     help="Lazy mode, auto-attach to first found session")
 
 # Play previously recorded session
-parser.add_argument(
+command_group.add_argument(
     "--replay",
     metavar="FILE",
     nargs="?",
     type=str,
     help="Play previously recorded session")
 
-args = parser.parse_args()
+# GotchaArgs
+gotcha_args = GotchaArgs(**vars(parser.parse_args()))
+# print(gotcha_args)
+
+
+# root privileges
+if os.geteuid() != 0:
+    parser.print_help()
+    print("\n\n\t*** root privileges required for this software. ***\n")
+    sys.exit(1)
+
+# strace is required
+if not which("strace"):
+    parser.print_help()
+    print("\n\n\t*** linux syscall tracer is required. ***\n\n\t\tSee: https://strace.io\n")
+    sys.exit(1)

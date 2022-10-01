@@ -8,5 +8,6 @@
     "python.linting.lintOnSave": true,
 	"python.linting.pylintEnabled": true,
     "python.testing.pytestArgs" : ["tests", "--verbose"],
-	"python.testing.autoTestDiscoverOnSaveEnabled": true
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    "esbonio.sphinx.confDir": ""
 }

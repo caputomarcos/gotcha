@@ -48,4 +48,28 @@ Feel free! All contributions are welcome.
 TO DO
 -----
  
-   Change __main__.main and gotcha.main based on the file => args.py
+   * CHANGE `__main__.main` AND `gotcha.main` TO `gotcha/args.py` *argparse* ::
+
+         usage: args.py [-h] [-v | -q] [-l | -t TTY | -a | --replay [FILE]]
+
+         ·:.                                                            .:·
+
+            ██████╗  ██████╗ ████████╗ ██████╗██╗  ██╗ █████╗ ██╗██╗██╗
+            ██╔════╝ ██╔═══██╗╚══██╔══╝██╔════╝██║  ██║██╔══██╗██║██║██║
+            ██║  ███╗██║   ██║   ██║   ██║     ███████║███████║██║██║██║
+            ██║   ██║██║   ██║   ██║   ██║     ██╔══██║██╔══██║╚═╝╚═╝╚═╝
+            ╚██████╔╝╚██████╔╝   ██║   ╚██████╗██║  ██║██║  ██║██╗██╗██╗
+            ╚═════╝  ╚═════╝    ╚═╝    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝╚═╝
+
+         .:·                       SSH-TTY control                       ·:.
+                                 -+---------------+-
+
+         optional arguments:
+         -h, --help         show this help message and exit
+         -v, --verbose      Turn on verbose output
+         -q, --quiet        Enable quiet mode
+         -l, --list         List available SSH Sessions
+         -t TTY, --tty TTY  Point GOTCHA to specific TTY
+         -a, --auto         Lazy mode, auto-attach to first found session
+         --replay [FILE]    Play previously recorded session
+
