@@ -32,7 +32,7 @@ GOTCHA - The SSH-TTY control Interface
          *** root privileges required for this software. ***
 
 ::
-   
+
       $ sudo ./gotcha 
       usage: gotcha [-h] [-v | -q] [-l | -s [{1,2,3}] | -t [tty] | -a | --replay [session]]
 
