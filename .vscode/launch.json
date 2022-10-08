@@ -10,7 +10,7 @@
       "request": "attach",
       "connect": {
         "host": "localhost", // replace this with remote machine name
-        "port": 5672
+        "port": 5678
       }
     }
   ]

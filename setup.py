@@ -1,6 +1,6 @@
 """setup GOTCHA_TTY
 """
-__updated__ = "2022-09-25 22:31:15"
+__updated__ = "2022-10-08 00:53:52"
 
 import os
 from configparser import ConfigParser

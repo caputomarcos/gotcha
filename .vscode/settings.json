@@ -3,11 +3,20 @@
     "python.testing.pytestEnabled": true,
     "python.testing.unittestEnabled": false,
     "python.terminal.activateEnvInCurrentTerminal": true,
-    "editor.formatOnSave":true,
+    "editor.formatOnSave": true,
     "python.formatting.provider": "autopep8",
     "python.linting.lintOnSave": true,
-	"python.linting.pylintEnabled": true,
-    "python.testing.pytestArgs" : ["tests", "--verbose"],
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        "--max-line-length=160"
+    ],
+    "python.testing.pytestArgs": [
+        "tests",
+        "--verbose"
+    ],
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportPrivateUsage": "error"
+    },
     "python.testing.autoTestDiscoverOnSaveEnabled": true,
     "esbonio.sphinx.confDir": ""
 }
