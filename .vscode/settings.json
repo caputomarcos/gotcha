@@ -8,7 +8,8 @@
     "python.linting.lintOnSave": true,
     "python.linting.pylintEnabled": true,
     "python.linting.pylintArgs": [
-        "--max-line-length=160"
+        "--max-line-length=160",
+        "--max-attributes=9"
     ],
     "python.testing.pytestArgs": [
         "tests",
