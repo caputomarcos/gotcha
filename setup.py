@@ -1,6 +1,6 @@
 """setup GOTCHA_TTY
 """
-__updated__ = "2022-10-08 00:53:52"
+__updated__ = "2022-10-08 13:25:05"
 
 import os
 from configparser import ConfigParser
@@ -19,7 +19,7 @@ about = {}
 if not VERSION:
     SLUG = NAME.lower().replace("-", "_").replace(" ", "_")
     with open(os.path.join(here, SLUG, "__version__.py"), encoding="utf-8") as f:
-        exec(f.read(), about)
+        exec(f.read(), about)  # pylint: disable=exec-used
 else:
     about["__version__"] = VERSION
 

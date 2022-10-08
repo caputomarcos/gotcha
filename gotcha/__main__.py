@@ -119,5 +119,5 @@ if __name__ == "__main__":
             gotcha.replay(gotcha_args.replay)
         else:
             parser.print_usage()
-    except Exception:
-        eeprint("bye!")
+    except Exception:  # pylint: disable=broad-except
+        sys.exit(1)

