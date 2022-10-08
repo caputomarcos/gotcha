@@ -17,14 +17,14 @@ GOTCHA - The SSH-TTY control Interface
       .:·                                                             ·:.
 
       options:
-      -h, --help            show this help message and exit
+      -h, --help            Show this help message and exit
       -v, --verbose         Turn on verbose output
       -q, --quiet           Enable quiet mode
       -l, --list            List available SSH Sessions
       -s [{1,2,3}], --session-files [{1,2,3}]
-                              List Session Files
+                            List Session Files
       -t [tty], --tty [tty]
-                              Point GOTCHA to specific TTY
+                            Point GOTCHA to specific TTY
       -a, --auto            Lazy mode, auto-attach to first found session
       --replay [session]    Play previously recorded session
 
