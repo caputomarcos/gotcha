@@ -56,3 +56,9 @@ Community Distributions
 -----------------------
 
 Feel free! All contributions are welcome.
+
+TO DO
+-----
+
+      -v, --verbose         Turn on verbose output
+      -q, --quiet           Enable quiet mode
