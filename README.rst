@@ -45,6 +45,10 @@ From pypi::
 
    pip3 install ttyGotcha
 
+From pyinstaller::
+
+   make pyinstaller
+
 From source::
 
    git clone https://github.com/caputomarcos/gotcha.git
