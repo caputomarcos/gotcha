@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """gotcha.py
 """
-__updated__ = "2022-10-08 20:57:34"
+__updated__ = "2022-10-08 21:35:23"
 
 
 import termios
@@ -255,7 +255,7 @@ class GotchaTTY:
 
                 # Type ' ' and backspace to get first data, otherwise if
                 # no data received - the program will terminate
-                with open(self.tty) as _fi:
+                with open(self.tty) as _fi: # pylint: disable=unspecified-encoding
                     for temp in [" ", "\x7f", "\r", "\n"]:  # '\x7f','\n']:
                         fcntl.ioctl(_fi, termios.TIOCSTI, temp)
                         time.sleep(0.05)
@@ -263,7 +263,7 @@ class GotchaTTY:
                 while self.working:
                     try:
                         cmd = sys.stdin.readline(1)
-                        with open(self.tty) as _f:
+                        with open(self.tty) as _f: # pylint: disable=unspecified-encoding
                             match cmd:
                                 # # Catch Ctrl+P and send hooking message
                                 case "\x1f":
