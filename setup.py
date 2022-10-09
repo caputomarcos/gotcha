@@ -1,6 +1,6 @@
 """setup GOTCHA_TTY
 """
-__updated__ = "2022-10-08 13:25:05"
+__updated__ = "2022-10-08 20:58:57"
 
 import os
 from configparser import ConfigParser
@@ -22,6 +22,10 @@ if not VERSION:
         exec(f.read(), about)  # pylint: disable=exec-used
 else:
     about["__version__"] = VERSION
+
+# get the long description from the README.rst
+with open(os.path.join(here, "README.rst"), encoding="utf-8") as f:
+    long_description = f.read()
 
 
 class ListDependenciesCommand(Command):
@@ -79,10 +83,30 @@ class PyInstallerCommand(Command):
 
 
 setup(
+    name="ttyGotcha",
     # use_scm_version={"fallback_version": "noversion"},
     version=about["__version__"],
     cmdclass={
         "dependencies": ListDependenciesCommand,
         "pyinstaller": PyInstallerCommand,
     },
+    description="SSH-TTY control Interface",
+    long_description=long_description,
+    author="Marcos Caputo",
+    author_email="caputo.marcos@gmail.com",
+    url="https://github.com/caputomarcos/gotcha",
+    packages=[
+        "gotcha",
+    ],
+    license="MIT",
+    install_requires=[
+        "psutil==5.9.2",
+    ],
+    entry_points={
+        "console_scripts": [
+            "gotcha = gotcha:__main__.main",
+        ]
+    },
+    python_requires=">=3.10.7",
+    include_package_data=True,
 )

@@ -6,7 +6,7 @@ import argparse
 import textwrap
 
 from shutil import which
-from gotcha_tty import GotchaTTY, GotchaArgs
+from gotcha.gotcha_tty import GotchaTTY, GotchaArgs
 
 parser = argparse.ArgumentParser(
     prog='gotcha',
