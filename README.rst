@@ -45,15 +45,16 @@ From pypi::
 
    pip3 install ttyGotcha
 
-From pyinstaller::
-
-   make pyinstaller
-
 From source::
 
    git clone https://github.com/caputomarcos/gotcha.git
    cd gotcha
    python setup.py install
+
+
+From pyinstaller::
+
+   make pyinstaller
 
 
 Community Distributions

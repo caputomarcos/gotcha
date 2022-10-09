@@ -8,6 +8,7 @@ setuptools_scm
 twine
 pyinstaller
 staticx
+isort
 black
 pre-commit
 flake8-bugbear

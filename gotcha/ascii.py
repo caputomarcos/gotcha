@@ -3,40 +3,40 @@
 """
 __updated__ = "2022-10-07 12:23:54"
 
-SPECIAL_KEYS_DICT = {       # Dec	Hex	    Hex	    Oct	    Oct	    Binary	Escaped	Ctrl Code	Character	Name
+SPECIAL_KEYS_DICT = {  # Dec	Hex	    Hex	    Oct	    Oct	    Binary	Escaped	Ctrl Code	Character	Name
     # "\x00": "[Ctrl+A]",   # 0	    \x00	(0x00)	\0	    (00)	0	    \0	    ^@		                Null char
-    "\x01": "[Ctrl+A]",     # 1	    \x01	(0x01)	\1	    (01)	1	 	        ^A	                    Start of Heading
-    "\x02": "[Ctrl+B]",     # 2	    \x02	(0x02)	\2	    (02)	10	 	        ^B	                    Start of Text
-    "\x03": "[Ctrl+C]",     # 3	    \x03	(0x03)	\3	    (03)	11	 	        ^C                      End of Text
-    "\x04": "[Ctrl+D]",     # 4	    \x04	(0x04)	\4	    (04)	100	 	        ^D	             	    End of Transmission
-    "\x05": "[Ctrl+E]",     # 5	    \x05	(0x05)	\5	    (05)	101	 	        ^E	             	    Enquiry
-    "\x06": "[Ctrl+F]",     # 6	    \x06	(0x06)	\6	    (06)	110	 	        ^F	             	    Acknowledgment
-    "\x07": "[Ctrl+G]",     # 7	    \x07	(0x07)	\7	    (07)	111	    \a	    ^G	             	    Bell
-    "\x08": "[Ctrl+H]",     # 8	    \x08	(0x08)	\10	    (010)	1000	\b	    ^H	             	    Back Space
+    "\x01": "[Ctrl+A]",  # 1	    \x01	(0x01)	\1	    (01)	1	 	        ^A	                    Start of Heading
+    "\x02": "[Ctrl+B]",  # 2	    \x02	(0x02)	\2	    (02)	10	 	        ^B	                    Start of Text
+    "\x03": "[Ctrl+C]",  # 3	    \x03	(0x03)	\3	    (03)	11	 	        ^C                      End of Text
+    "\x04": "[Ctrl+D]",  # 4	    \x04	(0x04)	\4	    (04)	100	 	        ^D	             	    End of Transmission
+    "\x05": "[Ctrl+E]",  # 5	    \x05	(0x05)	\5	    (05)	101	 	        ^E	             	    Enquiry
+    "\x06": "[Ctrl+F]",  # 6	    \x06	(0x06)	\6	    (06)	110	 	        ^F	             	    Acknowledgment
+    "\x07": "[Ctrl+G]",  # 7	    \x07	(0x07)	\7	    (07)	111	    \a	    ^G	             	    Bell
+    "\x08": "[Ctrl+H]",  # 8	    \x08	(0x08)	\10	    (010)	1000	\b	    ^H	             	    Back Space
     # "\t": "[Tab]",        # 9	    \x09	(0x09)	\11	    (011)	1001	\t	    ^I	            TAB	    Horizontal Tab
     # "\n": "[LF]",         # 10	\x0A	(0x0A)	\12	    (012)	1010	\n	    ^J	            LF	    Line Feed
-    "\x0b": "[Ctrl+K]",     # 11	\x0B	(0x0B)	\13	    (013)	1011	\v	    ^K	             	    Vertical Tab
-    "\x0c": "[Ctrl+L]",     # 12	\x0C	(0x0C)	\14	    (014)	1100	\f	    ^L	             	    Form Feed
+    "\x0b": "[Ctrl+K]",  # 11	\x0B	(0x0B)	\13	    (013)	1011	\v	    ^K	             	    Vertical Tab
+    "\x0c": "[Ctrl+L]",  # 12	\x0C	(0x0C)	\14	    (014)	1100	\f	    ^L	             	    Form Feed
     # "\r": "[Enter]\r\n",  # 13	\x0D	(0x0D)	\15	    (015)	1101	\r	    ^M	            CR	    Carriage Return
-    "\x0e": "[Ctrl+N]",     # 14	\x0E	(0x0E)	\16	    (016)	1110	 	    ^N	             	    Shift Out / X-On
-    "\x0f": "[Ctrl+O]",     # 15	\x0F	(0x0F)	\17	    (017)	1111	 	    ^O	             	    Shift In / X-Off
-    "\x10": "[Ctrl+P]",     # 16	\x10	(0x10)	\20	    (020)	10000	 	    ^P	             	    Data Line Escape
-    "\x11": "[Ctrl+Q]",     # 17	\x11	(0x11)	\21	    (021)	10001	 	    ^Q	             	    Device Control 1 (oft. XON)
-    "\x12": "[Ctrl+R]",     # 18	\x12	(0x12)	\22	    (022)	10010	 	    ^R	             	    Device Control 2
-    "\x13": "[Ctrl+S]",     # 19	\x13	(0x13)	\23	    (023)	10011	 	    ^S	             	    Device Control 3 (oft. XOFF)
-    "\x14": "[Ctrl+T]",     # 20	\x14	(0x14)	\24	    (024)	10100	 	    ^T	             	    Device Control 4
-    "\x15": "[Ctrl+U]",     # 21	\x15	(0x15)	\25	    (025)	10101	 	    ^U	             	    Negative Acknowledgement
-    "\x16": "[Ctrl+V]",     # 22	\x16	(0x16)	\26	    (026)	10110	 	    ^V	             	    Synchronous Idle
-    "\x17": "[Ctrl+W]",     # 23	\x17	(0x17)	\27	    (027)	10111	 	    ^W	             	    End of Transmit Block
-    "\x18": "[Ctrl+X]",     # 24	\x18	(0x18)	\30	    (030)	11000	 	    ^X	             	    Cancel
-    "\x19": "[Ctrl+Y]",     # 25	\x19	(0x19)	\31	    (031)	11001	 	    ^Y	             	    End of Medium
-    "\x1a": "[Ctrl+Z]",     # 26	\x1A	(0x1A)	\32	    (032)	11010	 	    ^Z	             	    Substitute
-    "\x1b": "[Ctrl+[]",     # 27	\x1B	(0x1B)	\33	    (033)	11011	 	    ^[	             	    Escape
-    "\x1d": "[Ctrl+]]",     # 29	\x1D	(0x1D)	\35	    (035)	11101	 	    ^]	             	    Group Separator
+    "\x0e": "[Ctrl+N]",  # 14	\x0E	(0x0E)	\16	    (016)	1110	 	    ^N	             	    Shift Out / X-On
+    "\x0f": "[Ctrl+O]",  # 15	\x0F	(0x0F)	\17	    (017)	1111	 	    ^O	             	    Shift In / X-Off
+    "\x10": "[Ctrl+P]",  # 16	\x10	(0x10)	\20	    (020)	10000	 	    ^P	             	    Data Line Escape
+    "\x11": "[Ctrl+Q]",  # 17	\x11	(0x11)	\21	    (021)	10001	 	    ^Q	             	    Device Control 1 (oft. XON)
+    "\x12": "[Ctrl+R]",  # 18	\x12	(0x12)	\22	    (022)	10010	 	    ^R	             	    Device Control 2
+    "\x13": "[Ctrl+S]",  # 19	\x13	(0x13)	\23	    (023)	10011	 	    ^S	             	    Device Control 3 (oft. XOFF)
+    "\x14": "[Ctrl+T]",  # 20	\x14	(0x14)	\24	    (024)	10100	 	    ^T	             	    Device Control 4
+    "\x15": "[Ctrl+U]",  # 21	\x15	(0x15)	\25	    (025)	10101	 	    ^U	             	    Negative Acknowledgement
+    "\x16": "[Ctrl+V]",  # 22	\x16	(0x16)	\26	    (026)	10110	 	    ^V	             	    Synchronous Idle
+    "\x17": "[Ctrl+W]",  # 23	\x17	(0x17)	\27	    (027)	10111	 	    ^W	             	    End of Transmit Block
+    "\x18": "[Ctrl+X]",  # 24	\x18	(0x18)	\30	    (030)	11000	 	    ^X	             	    Cancel
+    "\x19": "[Ctrl+Y]",  # 25	\x19	(0x19)	\31	    (031)	11001	 	    ^Y	             	    End of Medium
+    "\x1a": "[Ctrl+Z]",  # 26	\x1A	(0x1A)	\32	    (032)	11010	 	    ^Z	             	    Substitute
+    "\x1b": "[Ctrl+[]",  # 27	\x1B	(0x1B)	\33	    (033)	11011	 	    ^[	             	    Escape
+    "\x1d": "[Ctrl+]]",  # 29	\x1D	(0x1D)	\35	    (035)	11101	 	    ^]	             	    Group Separator
     # "\x1e": "[^^]",       # 30	\x1E	(0x1E)	\36	    (036)	11110	 	    ^^	             	    Record Separator
-    "\x1f": "[Ctrl+/]",     # 31	\x1F	(0x1F)	\37	    (037)	11111	 	    ^_	                	Unit Separator
+    "\x1f": "[Ctrl+/]",  # 31	\x1F	(0x1F)	\37	    (037)	11111	 	    ^_	                	Unit Separator
     # "\x20": "[SPACE]",    # 32	\x20	(0x20)	\40	    (040)	100000	 	 	  	            SPACE
-    "\x7f": "[<--]"         # 127	\x7F	(0x7F)	\177	(0177)	1111111	 	 	
+    "\x7f": "[<--]",  # 127	\x7F	(0x7F)	\177	(0177)	1111111	 	 	
 }
 
 # 33	\x21	(0x21)	\41	    (041)	100001	 	 	!

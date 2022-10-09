@@ -5,6 +5,10 @@
     "python.terminal.activateEnvInCurrentTerminal": true,
     "editor.formatOnSave": true,
     "python.formatting.provider": "autopep8",
+    "python.formatting.blackArgs": [
+        "--target-version",
+        "py310"
+    ],
     "python.linting.lintOnSave": true,
     "python.linting.pylintEnabled": true,
     "python.linting.pylintArgs": [
