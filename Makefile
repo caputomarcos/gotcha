@@ -68,11 +68,14 @@ pyinstaller: deps
 
 .PHONY: staticx_deps
 staticx_deps:
-	command -v patchelf > /dev/null 2>&1 || (echo "patchelf is not available. install it in order to use staticx" && false)
+	@command -v patchelf > /dev/null 2>&1 || (echo "patchelf is not available. install it in order to use staticx" && false)
 
 .PHONY: pyinstaller_static
 pyinstaller_static: staticx_deps pyinstaller
-	staticx $(COMPILED) $(STATIC_COMPILED)
+	@echo -e '\n\t => staticx does not work with python 3.10.7 <=\n'
+	@echo -e '\t\tstaticx $(COMPILED) $(STATIC_COMPILED)\n'
+	@echo -e '\tSee https://github.com/JonathonReinhart/staticx/issues/188\n'
+	# staticx $(COMPILED) $(STATIC_COMPILED)
 
 .PHONY: install
 install:          ## Install GOTCHA in dev mode.
