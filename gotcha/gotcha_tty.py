@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """gotcha.py
 """
-__updated__ = "2022-10-08 21:35:23"
+__updated__ = "2022-10-08 23:50:52"
 
 
 import termios
@@ -19,7 +19,11 @@ from threading import Thread
 from dataclasses import dataclass
 from subprocess import Popen, PIPE
 
-from gotcha.ascii import SPECIAL_KEYS_DICT
+# Ugly, but works!
+try:
+    from ascii import SPECIAL_KEYS_DICT
+except  ImportError:
+    from gotcha.ascii import SPECIAL_KEYS_DICT
 
 PS_UTIL = False
 try:

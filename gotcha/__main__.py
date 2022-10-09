@@ -6,8 +6,13 @@ import argparse
 import textwrap
 
 from shutil import which
-from gotcha.gotcha_tty import GotchaTTY, GotchaArgs
 
+# Ugly, but works!
+try:
+    from gotcha_tty import GotchaTTY, GotchaArgs
+except  ImportError:
+    from gotcha.gotcha_tty import GotchaTTY, GotchaArgs
+    
 parser = argparse.ArgumentParser(
     prog='gotcha',
     formatter_class=argparse.RawTextHelpFormatter,

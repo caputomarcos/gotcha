@@ -1,6 +1,6 @@
 """setup GOTCHA_TTY
 """
-__updated__ = "2022-10-08 23:24:42"
+__updated__ = "2022-10-08 23:46:51"
 
 import os
 from configparser import ConfigParser
@@ -101,7 +101,6 @@ setup(
     license="MIT",
     install_requires=[
         "psutil==5.9.2",
-        "pyparsing==3.0.8"
     ],
     entry_points={
         "console_scripts": [
