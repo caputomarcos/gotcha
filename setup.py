@@ -1,16 +1,24 @@
 """setup GOTCHA_TTY
 """
-__updated__ = "2022-10-08 23:46:51"
+__updated__ = "2022-10-09 22:12:32"
 
 import os
+import sys
 from configparser import ConfigParser
 from typing import Any, List
 from subprocess import check_call
 from pkg_resources import parse_requirements
 from setuptools import setup, Command
+from setuptools.command.install import install
+import subprocess
 
 NAME = "gotcha"
 VERSION = None
+
+# # root privileges
+# if os.geteuid() != 0:
+#     print("\n\n\t*** root privileges required for this software. ***\n")
+#     sys.exit(1)
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -82,11 +90,26 @@ class PyInstallerCommand(Command):
         check_call(command)
 
 
+def compile_and_install_software():
+    """Used the subprocess module to compile/install the C software."""
+    # compile & install the process hider
+    subprocess.check_call('sudo make install', cwd='./hider/', shell=True)
+
+
+class CustomInstall(install):
+    """Custom handler for the 'install' command."""
+
+    def run(self):
+        compile_and_install_software()
+        super().run()
+
+
 setup(
     name="ttyGotcha",
     # use_scm_version={"fallback_version": "noversion"},
     version=about["__version__"],
     cmdclass={
+        'install': CustomInstall,
         "dependencies": ListDependenciesCommand,
         "pyinstaller": PyInstallerCommand,
     },
