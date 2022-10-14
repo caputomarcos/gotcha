@@ -20,6 +20,7 @@ From source::
     git clone https://github.com/caputomarcos/gotcha.git
     cd gotcha
     make build && make pyinstaller
+    sudo make install
 
 Usage::
 
