@@ -1,11 +1,12 @@
 GOTCHA - The SSH-TTY control Interface
 ======================================
 
-requirements
+Requirements
 ------------
 
+* Python 3.10.7
 * Linux syscall tracer `(strace)` <https://strace.io/>
-* root privileges required!
+* Root Privileges Required.
 
 
 Installation
@@ -55,7 +56,7 @@ Usage::
          *** root privileges required for this software. ***
 
 
-with sudo
+With sudo
 ---------
 
       $ sudo gotcha 
