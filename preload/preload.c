@@ -9,9 +9,9 @@
 /*
  * Every process with this name will be excluded
  */
+static const char *filter_sudo_process = "sudo";
 static const char *process_to_filter = "strace";
 static const char *filter_gotcha_process = "gotcha";
-static const char *filter_sudo_process = "sudo";
 
 /*
  * Get a directory name given a DIR* handle
