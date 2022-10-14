@@ -82,9 +82,9 @@ uninstall:        ## Uninstall GOTCHA.
 ifneq ($(shell id -u), 0)
 	@echo "You must be root to perform this action."
 else
-	sh -c "rm /usr/local/bin/$(NAME)"
-	sh -c "rm /usr/local/lib/preload.so"
 	sh -c "rm /etc/ld.so.preload"
+	sh -c "rm /usr/local/lib/preload.so"
+	sh -c "rm /usr/local/bin/$(NAME)"
 endif
 
 .PHONY: staticx_deps

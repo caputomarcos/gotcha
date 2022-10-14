@@ -1,8 +1,29 @@
 GOTCHA - The SSH-TTY control Interface
 ======================================
-::
 
-      $ ./gotcha 
+requirements
+------------
+
+* Linux syscall tracer `(strace)` <https://strace.io/>
+* root privileges required!
+
+
+Installation
+------------   
+
+From pypi::
+
+    pip3 install ttyGotcha
+
+From source::
+
+    git clone https://github.com/caputomarcos/gotcha.git
+    cd gotcha
+    make build && make pyinstaller
+
+Usage::
+
+      $ gotcha 
       usage: gotcha [-h] [-v | -q] [-l | -s [{1,2,3}] | -t [tty] | -a | --replay [session]]
 
       ·:.                                                             .:·
@@ -31,36 +52,20 @@ GOTCHA - The SSH-TTY control Interface
 
          *** root privileges required for this software. ***
 
-::
 
-      $ sudo ./gotcha 
+with sudo
+---------
+
+      $ sudo gotcha 
       usage: gotcha [-h] [-v | -q] [-l | -s [{1,2,3}] | -t [tty] | -a | --replay [session]]
-
-Installation
-------------
-   
-   Linux syscall tracer `(strace) <https://strace.io/>`_ and root privileges required!
-
-From pypi::
-
-   pip3 install ttyGotcha
-
-From source::
-
-   git clone https://github.com/caputomarcos/gotcha.git
-   cd gotcha
-   python setup.py install
-
-
-From pyinstaller::
-
-   make pyinstaller
 
 
 Community Distributions
 -----------------------
 
-Feel free! All contributions are welcome.
+
+    Feel free! All contributions are welcome. =)
+
 
 TO DO
 -----
