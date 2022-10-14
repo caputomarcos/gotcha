@@ -11,16 +11,17 @@ requirements
 Installation
 ------------   
 
-From pypi::
-
-    pip3 install ttyGotcha
-
 From source::
 
     git clone https://github.com/caputomarcos/gotcha.git
     cd gotcha
     make build && make pyinstaller
     sudo make install
+
+From pypi::
+
+    sudo su -
+    pip3 install ttyGotcha
 
 Usage::
 
