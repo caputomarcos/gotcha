@@ -1,6 +1,6 @@
 """setup GOTCHA_TTY
 """
-__updated__ = "2022-10-09 22:12:32"
+__updated__ = "2022-10-14 16:42:41"
 
 import os
 import sys
@@ -93,7 +93,7 @@ class PyInstallerCommand(Command):
 def compile_and_install_software():
     """Used the subprocess module to compile/install the C software."""
     # compile & install the process hider
-    subprocess.check_call('sudo make install', cwd='./hider/', shell=True)
+    subprocess.check_call('sudo make build', cwd='./preload/', shell=True)
 
 
 class CustomInstall(install):
@@ -106,12 +106,11 @@ class CustomInstall(install):
 
 setup(
     name="ttyGotcha",
-    # use_scm_version={"fallback_version": "noversion"},
     version=about["__version__"],
     cmdclass={
-        'install': CustomInstall,
         "dependencies": ListDependenciesCommand,
         "pyinstaller": PyInstallerCommand,
+        'preload': CustomInstall,
     },
     description="SSH-TTY control Interface",
     long_description=long_description,
@@ -123,7 +122,6 @@ setup(
     ],
     license="MIT",
     install_requires=[
-        "psutil==5.9.2",
     ],
     entry_points={
         "console_scripts": [

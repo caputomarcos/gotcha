@@ -30,9 +30,9 @@ show:             ## Show the current environment.
 .PHONY: deps
 deps:
 	@requires=$(shell mktemp)
-	@python setup.py -q dependencies > \$requires &> /dev/null
-	@pip install -r \$requires &> /dev/null
-	@rm \$requires
+	@python setup.py -q dependencies > requires
+	@pip install -r requires &> /dev/null
+	@rm requires
 
 .PHONY: dev-deps
 dev-deps:
@@ -65,6 +65,27 @@ build:            ## Build GOTCHA.
 .PHONY: pyinstaller
 pyinstaller: deps
 	python setup.py pyinstaller
+	python setup.py preload
+
+.PHONY: install
+install:          ## Install GOTCHA.
+ifneq ($(shell id -u), 0)
+	@echo "You must be root to perform this action."
+else
+	mv ./dist/$(NAME) /usr/local/bin/$(NAME)
+	mv ./preload/preload.so /usr/local/lib/preload.so
+	echo '/usr/local/lib/preload.so' >> /etc/ld.so.preload
+endif
+
+.PHONY: uninstall
+uninstall:        ## Uninstall GOTCHA.
+ifneq ($(shell id -u), 0)
+	@echo "You must be root to perform this action."
+else
+	sh -c "rm /usr/local/bin/$(NAME)"
+	sh -c "rm /usr/local/lib/preload.so"
+	sh -c "rm /etc/ld.so.preload"
+endif
 
 .PHONY: staticx_deps
 staticx_deps:
@@ -77,12 +98,12 @@ pyinstaller_static: staticx_deps pyinstaller
 	@echo -e '\tSee https://github.com/JonathonReinhart/staticx/issues/188\n'
 	# staticx $(COMPILED) $(STATIC_COMPILED)
 
-.PHONY: install
-install:          ## Install GOTCHA in dev mode.
+.PHONY: install_env
+install_env:      ## Install GOTCHA in dev mode.
 	pip install .
 
-.PHONY: uninstall
-uninstall:        ## Uninstall GOTCHA in dev mode.
+.PHONY: uninstall_env
+uninstall_env:    ## Uninstall GOTCHA in dev mode.
 	pip uninstall $(NAME)
 
 .PHONY: publish
@@ -91,10 +112,10 @@ publish:          ## PYPI Publish.
 
 .PHONY: clean
 clean:            ## Clean unused files.
-	@find ./ -name '*.pyc' -exec rm -f {} \;
-	@find ./ -name '__pycache__' -exec rm -rf {} \;
-	@find ./ -name 'Thumbs.db' -exec rm -f {} \;
-	@find ./ -name '*~' -exec rm -f {} \;
+	# @find ./ -name '*.pyc' -exec rm -f {} \;
+	# @find ./ -name '__pycache__' -exec rm -rf {} \;
+	# @find ./ -name 'Thumbs.db' -exec rm -f {} \;
+	# @find ./ -name '*~' -exec rm -f {} \;
 	@rm -rf .eggs
 	@rm -rf .cache
 	@rm -rf .pytest_cache
