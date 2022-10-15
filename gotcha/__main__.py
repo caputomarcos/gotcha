@@ -90,6 +90,16 @@ command_group.add_argument(
     help="Play previously recorded session",
 )
 
+# Playback speed
+display_group.add_argument(
+    "--speed",
+    metavar="speed",
+    nargs="?",
+    type=float,
+    default=1.0,
+    help="Playback speed",
+)
+
 # root privileges
 if os.geteuid() != 0:
     parser.print_help()
@@ -131,7 +141,7 @@ if __name__ == "__main__":
         elif gotcha_args.session_files:
             gotcha.session_list(gotcha_args.session_files)
         elif gotcha_args.replay:
-            gotcha.replay(gotcha_args.replay)
+            gotcha.replay(session=gotcha_args.replay, speed=gotcha_args.speed)
         else:
             parser.print_usage()
     except Exception:  # pylint: disable=broad-except

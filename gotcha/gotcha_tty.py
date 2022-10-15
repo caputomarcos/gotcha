@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """gotcha.py
 """
-__updated__ = "2022-10-14 13:15:12"
+__updated__ = "2022-10-15 18:23:15"
 
 
 import fcntl
@@ -87,7 +87,7 @@ class GotchaArgs:
     tty: str = "auto"
     auto: bool = False
     replay: str = ""
-    speed: int = 1
+    speed: int = 1.0
 
 
 @dataclass
@@ -373,7 +373,7 @@ class GotchaTTY:
                 f"{_u:<10} {self.__get_pid_of_tty(_t):<10} {'/dev/'+_t:<10}"
             )
 
-    def replay(self, session: str = None) -> None:
+    def replay(self, session: str = None, speed: float = 1.0) -> None:
         """_summary_"""
         try:
             if session:
@@ -394,7 +394,10 @@ class GotchaTTY:
                     try:
                         _d = json.loads(line)
                         now = float(_d["d"])
-                        timeout = float(now) / 300  # self.speed
+                        # FIX default speed: float = 1.0  doesn't work
+                        if not speed:
+                            speed = 1.0
+                        timeout = float(now) / speed
                         # we don't want to wait more than 10 seconds to see what happens next
                         if timeout > 60:
                             timeout = 10
