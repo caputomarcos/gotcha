@@ -56,10 +56,6 @@ Usage::
 
         *** root privileges required for this software. ***
 
-
-WITH sudo
----------
-
 WITH sudo::
 
     sudo gotcha
