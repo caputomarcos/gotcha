@@ -61,8 +61,9 @@ WITH sudo
 ---------
 
 ```bash
-$ sudo gotcha 
-usage: gotcha [-h] [-v | -q] [-l | -s [{1,2,3}] | -t [tty] | -a | --replay [session]]
+    $ sudo gotcha
+    usage: gotcha [-h] [-v | -q] [-l | -s [{1,2,3}] | -t [tty] | -a | --replay [session]]
+
 ```
 
 Community Distributions
