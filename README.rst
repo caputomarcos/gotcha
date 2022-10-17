@@ -27,35 +27,35 @@ From pypi::
 Usage::
 
     $ gotcha 
-    usage: gotcha [-h] [-v] [-q] [-l] [-s [{1,2,3}]] [-t [tty]] [-a] [--replay [session]] [--speed [speed]] [--snapshot [session]]
+        usage: gotcha [-h] [-v] [-q] [-l] [-s [{1,2,3}]] [-t [tty]] [-a] [--replay [session]] [--speed [speed]] [--snapshot [session]]
 
-    ·:.                                                            .:·
+        ·:.                                                            .:·
 
-     ██████╗  ██████╗ ████████╗ ██████╗██╗  ██╗ █████╗ ██╗██╗██╗
-    ██╔════╝ ██╔═══██╗╚══██╔══╝██╔════╝██║  ██║██╔══██╗██║██║██║
-    ██║  ███╗██║   ██║   ██║   ██║     ███████║███████║██║██║██║
-    ██║   ██║██║   ██║   ██║   ██║     ██╔══██║██╔══██║╚═╝╚═╝╚═╝
-    ╚██████╔╝╚██████╔╝   ██║   ╚██████╗██║  ██║██║  ██║██╗██╗██╗
-     ╚═════╝  ╚═════╝    ╚═╝    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝╚═╝
+             ██████╗  ██████╗ ████████╗ ██████╗██╗  ██╗ █████╗ ██╗██╗██╗
+            ██╔════╝ ██╔═══██╗╚══██╔══╝██╔════╝██║  ██║██╔══██╗██║██║██║
+            ██║  ███╗██║   ██║   ██║   ██║     ███████║███████║██║██║██║
+            ██║   ██║██║   ██║   ██║   ██║     ██╔══██║██╔══██║╚═╝╚═╝╚═╝
+            ╚██████╔╝╚██████╔╝   ██║   ╚██████╗██║  ██║██║  ██║██╗██╗██╗
+             ╚═════╝  ╚═════╝    ╚═╝    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝╚═╝
 
-    .:·                                                             ·:.
+        .:·                                                             ·:.
 
-    options:
-    -h, --help            show this help message and exit
-    -v, --verbose         Turn on verbose output
-    -q, --quiet           Enable quiet mode
-    -l, --list            List available SSH Sessions
-    -s [{1,2,3}], --session-files [{1,2,3}]
-                            List Session Files
-    -t [tty], --tty [tty]
-                            Point GOTCHA to specific TTY
-    -a, --auto            Lazy mode, auto-attach to first found session
-    --replay [session]    Play previously recorded session
-    --speed [speed]       Playback Speed
-    --snapshot [session]  Export Session Output to Text Format
+        options:
+        -h, --help            show this help message and exit
+        -v, --verbose         Turn on verbose output
+        -q, --quiet           Enable quiet mode
+        -l, --list            List available SSH Sessions
+        -s [{1,2,3}], --session-files [{1,2,3}]
+                                List Session Files
+        -t [tty], --tty [tty]
+                                Point GOTCHA to specific TTY
+        -a, --auto            Lazy mode, auto-attach to first found session
+        --replay [session]    Play previously recorded session
+        --speed [speed]       Playback Speed
+        --snapshot [session]  Export Session Output to Text Format
 
 
-        *** root privileges required for this software. ***
+            *** root privileges required for this software. ***
 
 
 WITH sudo::
