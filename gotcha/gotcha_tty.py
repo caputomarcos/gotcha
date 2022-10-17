@@ -42,15 +42,16 @@ def eeprint(*args, **kwargs):
     sys.exit(return_code)
 
 
-def ansi_escape_8(sometext: any) -> bytes:
+def ansi_escape_8(sometext: any) -> str:
     """
     ansi_escape_8(self, string_escape)
     """
     # 7-bit and 8-bit C1 ANSI sequences
     ansi_escape_8bit = re.compile(
-        rb"(?:\x1B[@-Z\\-_]|[\x80-\x9A\x9C-\x9F]|(?:\x1B\[|\x9B)[0-?]*[ -/]*[@-~])"
+        r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])'
+        # r"(?:\x1B[@-Z\\-_]|[\x80-\x9A\x9C-\x9F]|(?:\x1B\[|\x9B)[0-?]*[ -/]*[@-~])"
     )
-    return ansi_escape_8bit.sub(b"", sometext)
+    return ansi_escape_8bit.sub("", sometext)
 
 
 def string_escape(string: any, encoding="utf-8") -> any:
@@ -88,6 +89,7 @@ class GotchaArgs:
     auto: bool = False
     replay: str = ""
     speed: int = 1.0
+    snapshot: str = ""
 
 
 @dataclass
@@ -376,13 +378,14 @@ class GotchaTTY:
     def replay(self, session: str = None, speed: float = 1.0) -> None:
         """_summary_"""
         try:
-            if session:
-                self.session_file = f"/var/log/{session}"
-            else:
-                lst_files = glob.glob("/var/log/*sess*.log")
-                lst_files.sort(key=os.path.getmtime)
-                self.session_file = lst_files[-1]
+            # if session:
+            #     self.session_file = f"/var/log/{session}"
+            # else:
+            #     lst_files = glob.glob("/var/log/*sess*.log")
+            #     lst_files.sort(key=os.path.getmtime)
+            #     self.session_file = lst_files[-1]
 
+            self.session_file = f"/var/log/{session}"
             session_file = f"Replay of session {self.session_file}"
             eprint(session_file)
             eprint("-" * len(session_file))
@@ -409,6 +412,29 @@ class GotchaTTY:
                         break
 
             eprint("\n\nEnd of session replay.\n")
+        except FileNotFoundError as error:
+            eeprint(error)
+
+    def output(self, session: str = None) -> None:
+        """_summary_"""
+        try:
+            filename, _ = os.path.splitext(session)
+            # pylint: disable=unspecified-encoding
+            with open(f"{filename}.txt", "w") as output:
+                with open(f"/var/log/{session}", "r") as sess:
+                    output.write(f"\nSOF: {session}\n")
+                    output.write("-" * len(f"SOF: {session}"))
+                    output.write("\n")
+                    lines = sess.readlines()
+                    for line in lines:
+                        try:
+                            _d = json.loads(line)
+                            output.write(ansi_escape_8(_d["v"]))
+                        except KeyboardInterrupt:
+                            eprint("\n\n[!] Ctrl+C detected...\nSee you!\n")
+                            break
+                output.write(f"\n\nEOF: {session}\n")
+                output.write("-" * len(f"EOF: {session}"))
         except FileNotFoundError as error:
             eeprint(error)
 

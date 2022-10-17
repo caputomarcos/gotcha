@@ -97,7 +97,16 @@ display_group.add_argument(
     nargs="?",
     type=float,
     default=1.0,
-    help="Playback speed",
+    help="Playback Speed",
+)
+
+# Play previously recorded session
+command_group.add_argument(
+    "--snapshot",
+    metavar="session",
+    nargs="?",
+    type=str,
+    help="Export Session Output to Text Format",
 )
 
 # root privileges
@@ -142,6 +151,8 @@ if __name__ == "__main__":
             gotcha.session_list(gotcha_args.session_files)
         elif gotcha_args.replay:
             gotcha.replay(session=gotcha_args.replay, speed=gotcha_args.speed)
+        elif gotcha_args.snapshot:
+            gotcha.output(session=gotcha_args.snapshot)
         else:
             parser.print_usage()
     except Exception:  # pylint: disable=broad-except
