@@ -56,13 +56,11 @@ Usage::
 
         *** root privileges required for this software. ***
 
+WITH sudo::
 
-WITH sudo
----------
-
-    $ sudo gotcha 
+    sudo gotcha
     usage: gotcha [-h] [-v | -q] [-l | -s [{1,2,3}] | -t [tty] | -a | --replay [session]]
-
+    
 
 Community Distributions
 -----------------------
