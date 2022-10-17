@@ -27,11 +27,11 @@ From pypi::
 Usage::
 
     $ gotcha 
-    usage: gotcha [-h] [-v] [-q] [-l | -s [{1,2,3}] | -t [tty] | -a | --replay [session]] [--speed [speed]]
+    usage: gotcha [-h] [-v] [-q] [-l] [-s [{1,2,3}]] [-t [tty]] [-a] [--replay [session]] [--speed [speed]] [--snapshot [session]]
 
     ·:.                                                            .:·
 
-        ██████╗  ██████╗ ████████╗ ██████╗██╗  ██╗ █████╗ ██╗██╗██╗
+     ██████╗  ██████╗ ████████╗ ██████╗██╗  ██╗ █████╗ ██╗██╗██╗
     ██╔════╝ ██╔═══██╗╚══██╔══╝██╔════╝██║  ██║██╔══██╗██║██║██║
     ██║  ███╗██║   ██║   ██║   ██║     ███████║███████║██║██║██║
     ██║   ██║██║   ██║   ██║   ██║     ██╔══██║██╔══██║╚═╝╚═╝╚═╝
@@ -51,10 +51,12 @@ Usage::
                             Point GOTCHA to specific TTY
     -a, --auto            Lazy mode, auto-attach to first found session
     --replay [session]    Play previously recorded session
-    --speed [speed]       Playback speed
+    --speed [speed]       Playback Speed
+    --snapshot [session]  Export Session Output to Text Format
 
 
         *** root privileges required for this software. ***
+
 
 WITH sudo::
 
