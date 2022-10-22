@@ -100,11 +100,13 @@ display_group.add_argument(
     help="Playback Speed",
 )
 
+# Displays group options
+snap_group = parser.add_mutually_exclusive_group()
+
 # Play previously recorded session
-command_group.add_argument(
+snap_group.add_argument(
     "--snapshot",
-    metavar="session",
-    nargs="?",
+    metavar="snapshot",
     type=str,
     help="Export Session Output to Text Format",
 )
