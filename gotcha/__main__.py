@@ -1,7 +1,6 @@
 """args
 """
 import argparse
-import os
 import sys
 import textwrap
 from shutil import which
@@ -70,7 +69,7 @@ command_group.add_argument(
     metavar="tty",
     nargs="?",
     type=str,
-    help="Point GOTCHA to specific TTY",
+    help="Point GOTCHA to specific TTY. ***Root is Required***",
 )
 
 # Lazy mode, auto-attach to first found session
@@ -78,7 +77,7 @@ command_group.add_argument(
     "-a",
     "--auto",
     action="store_true",
-    help="Lazy mode, auto-attach to first found session",
+    help="Lazy mode, auto-attach to first found session. ***Root is Required***",
 )
 
 # Play previously recorded session
@@ -110,12 +109,6 @@ snap_group.add_argument(
     type=str,
     help="Export Session Output to Text Format",
 )
-
-# root privileges
-if os.geteuid() != 0:
-    parser.print_help()
-    print("\n\n\t*** root privileges required for this software. ***\n")
-    sys.exit(1)
 
 # Check if we are running in a TTY
 if not sys.stdout.isatty():

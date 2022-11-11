@@ -17,6 +17,7 @@ from dataclasses import dataclass
 from subprocess import PIPE, Popen
 from threading import Thread
 from typing import Any, List
+from functools import wraps
 
 import psutil
 
@@ -26,6 +27,20 @@ try:
 except ImportError:
     from gotcha.ascii import SPECIAL_KEYS_DICT
 
+
+def is_root(func):
+    """ is_root
+    """
+    @wraps(func)
+    def check_wrapper(*args, **kwargs):
+        """ Check Root Privileges
+        """
+        if os.geteuid() != 0:
+            print("[*] Root Privileges is Required for this Command!")
+            sys.exit(1)
+        result = func(*args, **kwargs)
+        return result
+    return check_wrapper
 
 def eprint(*args, **kwargs):
     """_summary_"""
@@ -334,6 +349,7 @@ class GotchaTTY:
             self.working = False
             sys.exit(1)
 
+    @is_root
     def attach(self, tty: str) -> None:
         """
         Lazy mode, auto-attach to first found session
