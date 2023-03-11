@@ -16,6 +16,9 @@ From source::
 
     git clone https://github.com/caputomarcos/gotcha.git
     cd gotcha
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements-dev.txt
     make build && make pyinstaller
     sudo make install
 
